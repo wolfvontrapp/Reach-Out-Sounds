@@ -161,7 +161,7 @@ while True:
           print "playing: set:" + str(current_set+1)+ ", sound: " + str(i)
           path = sets[current_set][i]
           print path
-          sound = pygame.mixer.Sound(path)
+          sound = pygame.mixer.Sound(pad.sample)
           pygame.mixer.Channel(i).play(sound)
 
     # ------ Buttons: ------

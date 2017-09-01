@@ -17,6 +17,10 @@ class Pad(object):
 
     @property
     def sample(self):
+        if self.position == len(self.samples)-1:
+            self.position = 0
+        else:
+            self.position += 1
         return self.samples[self.position]
 
     def __str__(self):

@@ -5,32 +5,31 @@ import pygame as pg
 
 class ArrowKeyController(object):
     def __init__(self):
-        self.inputs = [False for i in range(4)]
-        self.keys = [
+        self.states = [False for i in range(4)]
+        self.inputs = [
             pg.K_UP,
             pg.K_RIGHT,
             pg.K_DOWN,
             pg.K_LEFT,
         ]
-        print(self.inputs, len(self.inputs))
 
     def update(self):
         for event in pg.event.get():
             if event.type == pg.KEYDOWN:
-                keys = pg.key.get_pressed()
-                if keys[pg.K_ESCAPE]:
+                inputs = pg.key.get_pressed()
+                if inputs[pg.K_ESCAPE]:
                     exit()
 
-                for i, key in enumerate(self.keys):
-                    if keys[key] and self.inputs[i] != True:
-                        self.inputs[i] = True
+                for i, key in enumerate(self.inputs):
+                    if inputs[key] and self.states[i] != True:
+                        self.states[i] = True
                     else:
-                        self.inputs[i] = False
+                        self.states[i] = False
             elif event.type == pg.KEYUP:
-                for i, key in enumerate(self.keys):
-                    if self.inputs[i]:
-                        self.inputs[i] = False
+                for i, key in enumerate(self.inputs):
+                    if self.states[i]:
+                        self.states[i] = False
 
     @property
     def state(self):
-        return self.inputs
+        return self.states

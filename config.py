@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 import pygame
 
@@ -36,7 +37,7 @@ class Pad(object):
             else:
                 self.sample_position += 1
         elif self.mode == 'random':
-            self.sample_position = random.randint(len(self.samples)-1)
+            self.sample_position = random.randint(0, len(self.samples)-1)
         return self.samples[self.sample_position]
 
     def update(self, dt=0.0):

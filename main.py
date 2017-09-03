@@ -40,7 +40,6 @@ def main():
     # load the config
     #
     config = load_config('config.json')
-    print("Using config: {}".format(config['configs']))
 
     # deserialise the config into Pad objects
     pads = load_pads_from_config('samples', config, 0)

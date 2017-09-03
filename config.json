@@ -6,27 +6,22 @@
                     "name": "drums",
                     "pads": [
                         {
-                            "samples": ["drum1.wav", "drum2.wav"],
+                            "samples": ["BDrum1", "BDrum2"],
                             "mode": "cycle",
                             "timeout": 0.5
                         },
                         {
-                            "samples": ["kick1.wav", "kick2.wav"],
-                            "mode": "cycle",
-                            "timeout": 0.5
-                        }
-                    ]
-                },
-                {
-                    "name": "piano",
-                    "pads": [
-                        {
-                            "samples": ["pianoA1.wav", "pianoA2.wav"],
+                            "samples": ["Bongo1", "Bongo2"],
                             "mode": "cycle",
                             "timeout": 0.5
                         },
                         {
-                            "samples": ["pianoD1.wav", "pianoD2.wav"],
+                            "samples": ["Snare1", "Snare2", "Snare3", "Snare4"],
+                            "mode": "cycle",
+                            "timeout": 0.5
+                        },
+                        {
+                            "samples": ["Snare1", "Snare2", "Snare3", "Snare4"],
                             "mode": "cycle",
                             "timeout": 0.5
                         }

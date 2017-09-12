@@ -35,7 +35,7 @@ def main():
 
     # This is demo specific
     pygame.display.set_mode((256, 256))
-    controller = ArrowKeyController()
+    controller = ArrowKeyController(2)
 
     # load the config
     #
@@ -53,7 +53,6 @@ def main():
         # cycle through inputs
         # check if the pad has been touched
         #
-        keys = pygame.key.get_pressed()
 
         controller.update()
         for i, _input in enumerate(controller.state):

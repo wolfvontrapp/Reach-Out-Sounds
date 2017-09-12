@@ -4,8 +4,8 @@ import pygame as pg
 
 
 class ArrowKeyController(object):
-    def __init__(self):
-        self.states = [False for i in range(4)]
+    def __init__(self, num_inputs):
+        self.states = [False for i in range(num_inputs)]
         self.inputs = [
             pg.K_UP,
             pg.K_RIGHT,
@@ -21,12 +21,16 @@ class ArrowKeyController(object):
                     exit()
 
                 for i, key in enumerate(self.inputs):
+                    if i > len(self.states)-1:
+                        continue
                     if inputs[key] and self.states[i] != True:
                         self.states[i] = True
                     else:
                         self.states[i] = False
             elif event.type == pg.KEYUP:
                 for i, key in enumerate(self.inputs):
+                    if i > len(self.states)-1:
+                        continue
                     if self.states[i]:
                         self.states[i] = False
 

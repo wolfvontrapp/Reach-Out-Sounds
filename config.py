@@ -19,7 +19,7 @@ class Pad(object):
 
     def load_samples(self, base_path):
         for f in self._pad['samples']:
-            wav = os.path.join(base_path, self._bank['name'], f+'.wav')
+            wav = os.path.join(base_path, self._bank['name'], 'TRACK{0:02d}.wav'.format(f))
             if os.path.exists(wav):
                 self.samples.append(pygame.mixer.Sound(wav))
             else:

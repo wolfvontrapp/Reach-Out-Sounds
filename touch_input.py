@@ -1,12 +1,18 @@
 # keyboard input system
 #
 import pygame as pg
-
+import RPi.GPIO as GPIO
 
 class TouchController(object):
     def __init__(self):
-        self.inputs = [23, 18]
+        self.inputs = [21]
         self.states = [False for i in range(self.inputs)]
+
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
+
+        for pin in self.inputs:
+            GPIO.setup(pin, GPIO.OUT)
 
     def update(self):
         for event in events:

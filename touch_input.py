@@ -6,7 +6,7 @@ import RPi.GPIO as GPIO
 class TouchController(object):
     def __init__(self):
         self.inputs = [21]
-        self.states = [False for i in range(self.inputs)]
+        self.states = [False for i in self.inputs]
 
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)

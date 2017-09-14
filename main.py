@@ -5,7 +5,8 @@ from time import sleep, time
 import pygame
 
 import config
-from inputter import ArrowKeyController
+#from inputter import ArrowKeyController
+from touch_input import TouchController
 from config import Pad
 
 def load_config(filename):
@@ -35,7 +36,8 @@ def main():
 
     # This is demo specific
     # pygame.display.set_mode((256, 256))
-    controller = ArrowKeyController(2)
+    # controller = ArrowKeyController(2)
+    controller = TouchController()
 
     # load the config
     #

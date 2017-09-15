@@ -27,7 +27,7 @@ class TouchController(object):
             if press and not state and not play:
                 self.states[i] = True
                 self.play_sound[i] = True
-                print("button down", self.states[i])
+                print("button down", i, self.states[i])
 
             elif not press:
                 self.states[i] = False

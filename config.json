@@ -3,7 +3,7 @@
         {
             "banks": [
                 {
-                    "name": "BANK1",
+                    "name": "BANK_1",
                     "pads": [
                         {
                             "samples": [1,2,3],

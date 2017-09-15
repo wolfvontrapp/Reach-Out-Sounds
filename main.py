@@ -29,6 +29,9 @@ def load_pads_from_config(sample_path, config, config_id):
             pads.append(pad)
     return pads
 
+def load():
+    pass
+
 
 def main():
     pygame.mixer.pre_init(frequency = 44100, channels = 12, buffer = 1024)
@@ -42,7 +45,6 @@ def main():
     # load the config
     #
     config = load_config('config.json')
-
     # deserialise the config into Pad objects
     pads = load_pads_from_config('samples', config, 0)
     if pads == None:

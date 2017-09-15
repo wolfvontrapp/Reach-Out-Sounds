@@ -62,7 +62,7 @@ def main():
             pad = pads[i]
             if _input:
                 play_sound(i, pad.sample)
-                controller.state[i] = False
+                #controller.state[i] = False
             pad.update()
 
         sleep(0.01)

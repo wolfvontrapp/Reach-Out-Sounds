@@ -16,12 +16,11 @@ class TouchController(object):
 
     def update(self):
         for i, key in enumerate(self.inputs):
-            if GPIO.input(key):
-                if inputs[key] and self.states[i] != True:
-                    self.states[i] = True
-                else:
-                    self.states[i] = False
-            print(self.states[i])
+            if GPIO.input(key) == 0 and self.states[i] == False:
+                self.states[i] = True
+                print(self.states[i])
+            else:
+                self.states[i] = False
 
     @property
     def state(self):

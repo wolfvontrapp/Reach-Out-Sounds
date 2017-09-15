@@ -58,11 +58,11 @@ def main():
         #
 
         controller.update()
-        for i, _input in enumerate(controller.state):
+        for i, _input in enumerate(controller.play_sound):
             pad = pads[i]
             if _input:
                 play_sound(i, pad.sample)
-                #controller.state[i] = False
+                controller.play_sound[i] = False
             pad.update()
 
         sleep(0.01)

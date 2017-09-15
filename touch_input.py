@@ -4,8 +4,10 @@ import pygame as pg
 import RPi.GPIO as GPIO
 
 class TouchController(object):
-    def __init__(self):
-        self.inputs = [14]
+    def __init__(self, inputs):
+        if not inputs:
+            exit()
+        self.inputs = inputs
 
         self.states = [False for i in self.inputs]
         self.play_sound = [False for i in self.inputs]
@@ -25,11 +27,10 @@ class TouchController(object):
             if press and not state and not play:
                 self.states[i] = True
                 self.play_sound[i] = True
+                print("button down", self.states[i])
 
             elif not press:
                 self.states[i] = False
-
-            print("button down", self.states[i])
 
     @property
     def state(self):

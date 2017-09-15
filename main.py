@@ -37,7 +37,7 @@ def main():
     # This is demo specific
     # pygame.display.set_mode((256, 256))
     # controller = ArrowKeyController(2)
-    controller = TouchController()
+    controller = TouchController([14, 15])
 
     # load the config
     #

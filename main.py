@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 from time import sleep, time
 
 import pygame
@@ -34,6 +35,12 @@ def load():
 
 
 def main():
+
+    config_file = 'config.json'
+    if len(sys.argv) == 2:
+        if os.path.exists(sys.argv[1]):
+            config_file = sys.argv[1]
+
     pygame.mixer.pre_init(frequency = 44100, channels = 2, buffer = 1024)
     pygame.init()
 

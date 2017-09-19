@@ -29,7 +29,6 @@ class ArrowKeyController(object):
             if press and not state and not play and e.event_type == 'down':
                 self.states[i] = True
                 self.play_sound[i] = True
-                #print("button down", i, self.states[i])
 
             elif e.event_type == 'up' and press:
                 self.states[i] = False

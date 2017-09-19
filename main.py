@@ -45,7 +45,7 @@ def main():
     #
     config = load_config('config.json')
     # deserialise the config into Pad objects
-    pads = load_pads_from_config('/mnt/ef6394f1-9c8d-4e75-96cd-b17480a3ab2d/downloads/projects/Reach-out-sounds', config, 0)
+    pads = load_pads_from_config('samples', config, 0)
     if pads == None:
         print("No pads loaded!")
         exit(0)

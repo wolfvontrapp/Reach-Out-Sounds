@@ -5,8 +5,8 @@ from time import sleep, time
 import pygame
 
 import config
-#from inputter import ArrowKeyController
-from touch_input import TouchController
+from inputter import ArrowKeyController
+#from touch_input import TouchController
 from config import Pad
 
 def load_config(filename):
@@ -34,13 +34,12 @@ def load():
 
 
 def main():
-    pygame.mixer.pre_init(frequency = 44100, channels = 12, buffer = 1024)
+    pygame.mixer.pre_init(frequency = 44100, channels = 2, buffer = 1024)
     pygame.init()
 
     # This is demo specific
-    # pygame.display.set_mode((256, 256))
-    # controller = ArrowKeyController(2)
-    controller = TouchController([14, 15])
+    controller = ArrowKeyController([105,108])
+    #controller = TouchController([14, 15])
 
     # load the config
     #
@@ -58,10 +57,11 @@ def main():
         # cycle through inputs
         # check if the pad has been touched
         #
-
-        controller.update()
         for i, _input in enumerate(controller.play_sound):
-            pad = pads[i]
+            try:
+                pad = pads[i]
+            except IndexError:
+                continue
             if _input:
                 play_sound(i, pad.sample)
                 controller.play_sound[i] = False

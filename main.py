@@ -33,12 +33,12 @@ def load_pads_from_config(sample_path, config, config_id):
     return pads
 
 
-def load_pads(config_file):
+def load_pads(base_path, config_file):
     # load the config
     #
     config = load_config(config_file)
     # deserialise the config into Pad objects
-    pads = load_pads_from_config('samples', config, 0)
+    pads = load_pads_from_config(base_path, config, 0)
     if pads == None:
         print("No pads loaded!")
         exit(0)
@@ -56,6 +56,9 @@ def main():
     pygame.mixer.pre_init(frequency = 44100, channels = 2, buffer = 2048)
     pygame.init()
 
+    base_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            'samples')
     pads = load_pads(config_file)
 
     # Wrap the config load so we can hopefully reload the config on the fly

@@ -59,13 +59,13 @@ def main():
     base_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
             'samples')
-    pads = load_pads(config_file)
 
     # Wrap the config load so we can hopefully reload the config on the fly
     def _reload():
-        print("reloading...")
-        return load_pads(config_file)
+        print("loading...")
+        return load_pads(base_path, config_file)
 
+    pads = _reload()
 
     # This is demo specific
     controller = ArrowKeyController([105,108,106], pads, _reload)

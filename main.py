@@ -4,15 +4,18 @@ import sys
 from time import sleep, time
 
 import pygame
+import inotify.adapters
 
 import config
 from inputter import ArrowKeyController
 #from touch_input import TouchController
 from config import Pad
 
+
 def load_config(filename):
+    print("loading config file...")
     config = {}
-    with open('config.json', 'r') as f:
+    with open(filename, 'r') as f:
         config = json.load(f)
     return config
 
@@ -30,32 +33,40 @@ def load_pads_from_config(sample_path, config, config_id):
             pads.append(pad)
     return pads
 
-def load():
-    pass
 
-
-def main():
-
-    config_file = 'config.json'
-    if len(sys.argv) == 2:
-        if os.path.exists(sys.argv[1]):
-            config_file = sys.argv[1]
-
-    pygame.mixer.pre_init(frequency = 44100, channels = 2, buffer = 1024)
-    pygame.init()
-
-    # This is demo specific
-    controller = ArrowKeyController([105,108,106])
-    #controller = TouchController([14, 15])
-
+def load_pads(config_file):
     # load the config
     #
-    config = load_config('config.json')
+    config = load_config(config_file)
     # deserialise the config into Pad objects
     pads = load_pads_from_config('samples', config, 0)
     if pads == None:
         print("No pads loaded!")
         exit(0)
+
+    return pads
+
+
+def main():
+
+    config_file = 'config_example.json'
+    if len(sys.argv) == 2:
+        if os.path.exists(sys.argv[1]):
+            config_file = sys.argv[1]
+
+    pygame.mixer.pre_init(frequency = 44100, channels = 2, buffer = 2048)
+    pygame.init()
+
+    pads = load_pads(config_file)
+
+    # Wrap the config load so we can hopefully reload the config on the fly
+    def _reload():
+        print("reloading...")
+        return load_pads(config_file)
+
+
+    # This is demo specific
+    controller = ArrowKeyController([105,108,106], pads, _reload)
 
     # Main loop
     #
@@ -66,10 +77,11 @@ def main():
         #
         for i, _input in enumerate(controller.play_sound):
             try:
-                pad = pads[i]
+                pad = controller.pads[i]
             except IndexError:
                 continue
             if _input:
+                print(controller.pads)
                 play_sound(i, pad.sample)
                 controller.play_sound[i] = False
             pad.update()

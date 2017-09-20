@@ -22,6 +22,7 @@ class Pad(object):
             wav = os.path.join(base_path, self._bank['name'], 'TRACK{0:02d}.wav'.format(f))
             if os.path.exists(wav):
                 self.samples.append(pygame.mixer.Sound(wav))
+                print("Loaded file...", wav)
             else:
                 print("File {} does not exist".format(wav))
                 exit(0)

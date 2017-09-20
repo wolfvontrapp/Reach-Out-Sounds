@@ -4,7 +4,6 @@ import sys
 from time import sleep, time
 
 import pygame
-import inotify.adapters
 
 import config
 from inputter import ArrowKeyController

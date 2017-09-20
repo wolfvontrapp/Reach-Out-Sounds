@@ -80,7 +80,6 @@ def main():
             except IndexError:
                 continue
             if _input:
-                print(controller.pads)
                 play_sound(i, pad.sample)
                 controller.play_sound[i] = False
             pad.update()

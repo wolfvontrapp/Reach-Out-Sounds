@@ -52,7 +52,6 @@ class PiCapController(object):
         self.play_sound = [False for i in self.inputs]
         self.pads = pads
         self._reload = _reload
-        keyboard.hook(self.update)
 
         try:
             self.sensor = MPR121.begin()
@@ -61,28 +60,43 @@ class PiCapController(object):
             sys.exit(1)
 
 
-    def update(self, e):
-        # TODO: add GPIO button for reload
-        if false:
-            self.pads = self._reload()
-            time.sleep(2)
-            print('file_reloaded')
+        # this is the touch threshold - setting it low makes it more like a proximity trigger default value is 40 for touch
+        touch_threshold = 40
 
+        # this is the release threshold - must ALWAYS be smaller than the touch threshold default value is 20 for touch
+        release_threshold = 20
+
+        # set the thresholds
+        self.sensor.set_touch_threshold(touch_threshold)
+        self.sensor.set_release_threshold(release_threshold)
+
+
+
+    def update(self):
+        # TODO: add GPIO button for reload
         if self.sensor.touch_status_changed():
+            self.sensor.update_touch_data()
             for i, key in enumerate(self.inputs):
                 if i > len(self.states)-1:
+                    print("change")
                     continue
 
                 press = self.sensor.is_new_touch(i)
                 play = self.play_sound[i]
                 state = self.states[i]
 
+                if press and i == 11:
+                    self.pads = self._reload()
+                    time.sleep(2)
+                    print('file_reloaded')
+                    continue
+
                 # PICAP
-                if press and not state and not play and e.event_type == 'down':
+                if press and not state and not play:
                     self.states[i] = True
                     self.play_sound[i] = True
 
-                elif e.event_type == 'up' and press:
+                elif self.sensor.is_new_release(i):
                     self.states[i] = False
 
     @property

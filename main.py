@@ -1,13 +1,13 @@
 import json
 import os
-import sys
+import sys, signal
 from time import sleep, time
 
 import pygame
 
 import config
 from inputter import ArrowKeyController
-#from touch_input import TouchController
+from inputter import PiCapController
 from config import Pad
 
 
@@ -47,6 +47,12 @@ def load_pads(base_path, config_file):
 
 
 def main():
+    # handle ctrl+c gracefully
+    def signal_handler(signal, frame):
+      sys.exit(0)
+
+    signal.signal(signal.SIGINT, signal_handler)
+
 
     config_file = 'config_example.json'
     if len(sys.argv) == 2:
@@ -70,7 +76,7 @@ def main():
     pads = _reload()
 
     # This is demo specific
-    controller = ArrowKeyController([105,108,106], pads, _reload)
+    controller = PiCapController(range(12), pads, _reload)
 
     # Main loop
     #
@@ -89,6 +95,7 @@ def main():
                 controller.play_sound[i] = False
             pad.update()
 
+        controller.update()
         sleep(0.01)
 
 

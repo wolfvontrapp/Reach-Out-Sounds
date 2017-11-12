@@ -53,7 +53,9 @@ def main():
         if os.path.exists(sys.argv[1]):
             config_file = sys.argv[1]
 
-    pygame.mixer.pre_init(frequency = 44100, channels = 2, buffer = 2048)
+    pygame.mixer.pre_init(
+            frequency = 44100, size = -16, channels = 12, buffer = 4096)
+    pygame.mixer.init()
     pygame.init()
 
     base_path = os.path.join(
